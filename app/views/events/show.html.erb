@@ -1,0 +1,22 @@
+<h2><%= @event.title %></h2>
+<p>Date: <%= @event.event_date %></p>
+<p>Hosted by: <%= @event.creator&.name || "Unknown" %></p>
+
+<% if user_signed_in? %>
+  <% unless current_user.attended_events.include?(@event) %>
+    <%= button_to 'Attend Event', event_event_attendance_path(@event), method: :post, class: "btn btn-primary" %>
+  <% else %>
+    <p>You are attending this event.</p>
+  <% end %>
+<% else %>
+  <p>Please <%= link_to "sign in", new_user_session_path %> to attend this event.</p>
+<% end %>
+
+<h3>Attendees:</h3>
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li><%= attendee.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Events", events_path%>

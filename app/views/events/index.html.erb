@@ -1,0 +1,49 @@
+<h1>Upcoming Events</h1>
+
+<% if @upcoming_events.any? %>
+  <ul>
+    <% @upcoming_events.each do |event| %>
+      <li>
+        <strong><%= event.title %></strong><br>
+        <em><%= event.event_date.strftime("%B %d, %Y %I:%M %p") %></em><br>
+        <p><strong>Location:</strong> <%= event.location %></p>
+        <% if event.description.present? %>
+          <p><strong>Description:</strong> <%= event.description %></p>
+        <% end %>
+        <%= link_to 'View Event', event_path(event) %>
+      </li>
+      <hr>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No upcoming events found.</p>
+<% end %>
+
+<h1>Past Events</h1>
+
+<% if @past_events.any? %>
+  <ul>
+    <% @past_events.each do |event| %>
+      <li>
+        <strong><%= event.title %></strong><br>
+        <em><%= event.event_date.strftime("%B %d, %Y %I:%M %p") %></em><br>
+        <p><strong>Location:</strong> <%= event.location %></p>
+        <% if event.description.present? %>
+          <p><strong>Description:</strong> <%= event.description %></p>
+        <% end %>
+        <%= link_to 'View Event', event_path(event) %>
+      </li>
+      <hr>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No past events found.</p>
+<% end %>
+
+<% if user_signed_in? %>
+  <div class="profile-link">
+    <%= link_to 'Edit Profile', edit_user_registration_path %>
+  </div>
+<% end %>
+
+<%= link_to "New Event", new_event_path %>

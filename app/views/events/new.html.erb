@@ -1,0 +1,40 @@
+<h1>Create New Event</h1>
+
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div>
+      <h2>Form Errors:</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 4 %>
+  </div>
+
+  <div>
+    <%= f.label :event_date %>
+    <%= f.datetime_local_field :event_date %>
+  </div>
+
+  <div>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Event" %>
+  </div>
+<% end %>
+
+<%= link_to "Events", events_path%>
